@@ -11,7 +11,6 @@ export default function HackerTerminal() {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [histIndex, setHistIndex] = useState(-1);
-  const [cursorVisible, setCursorVisible] = useState(true);
   const [path, setPath] = useState('/home/kunalmandalia');
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,11 +34,6 @@ export default function HackerTerminal() {
     'Contact: you@domain.com',
     '==============================',
   ];
-
-  useEffect(() => {
-    const t = setInterval(() => setCursorVisible(v => !v), 500);
-    return () => clearInterval(t);
-  }, []);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -137,19 +131,24 @@ export default function HackerTerminal() {
       setHistIndex(nextIndex);
       setInput(history[nextIndex] ?? '');
     } else if (e.key === 'c' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
       setInput('');
+      setLines([]);
     }
   }
 
   return (
-    <div className="min-h-screen bg-black text-green-300 font-mono p-6 flex items-center justify-center">
+    <div
+      className="min-h-screen bg-black text-green-300 font-mono p-6 flex items-center justify-center"
+      onClick={() => inputRef.current?.focus()}
+    >
       <div className="w-full max-w-4xl border-2 border-green-700 shadow-2xl rounded-lg overflow-hidden">
         <div className="bg-black/80 px-4 py-2 flex items-center gap-3 border-b border-green-800">
           <div className="w-3 h-3 rounded-full bg-red-500" />
           <div className="w-3 h-3 rounded-full bg-yellow-400" />
           <div className="w-3 h-3 rounded-full bg-green-400" />
           <div className="ml-3 text-sm text-green-400">kunalmandalia.com</div>
-          <div className="ml-auto text-xs text-green-500">node@localhost:~</div>
+          <div className="ml-auto text-xs text-green-500 hidden sm:block">node@localhost:~</div>
         </div>
 
         <div ref={containerRef} className="bg-black px-6 py-5 h-[60vh] overflow-y-auto">
@@ -176,15 +175,12 @@ export default function HackerTerminal() {
               placeholder="type a command (help)"
               autoComplete="off"
             />
-            <div className="w-4 h-4">
-              <span aria-hidden className={`inline-block align-middle ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>█</span>
-            </div>
           </form>
         </div>
 
         <div className="bg-black/90 px-4 py-2 border-t border-green-800 flex items-center justify-between text-xs text-green-500">
-          <div>tips: press ↑ to browse history • Ctrl/C to clear input</div>
-          <div>customise: edit components/HackerTerminal.jsx</div>
+          <div>tips: press ↑ to browse history • Ctrl+C to clear input</div>
+          <div></div>
         </div>
       </div>
     </div>
