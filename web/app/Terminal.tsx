@@ -131,7 +131,9 @@ export default function HackerTerminal() {
       setHistIndex(nextIndex);
       setInput(history[nextIndex] ?? '');
     } else if (e.key === 'c' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
       setInput('');
+      setLines([]);
     }
   }
 
@@ -177,8 +179,8 @@ export default function HackerTerminal() {
         </div>
 
         <div className="bg-black/90 px-4 py-2 border-t border-green-800 flex items-center justify-between text-xs text-green-500">
-          <div>tips: press ↑ to browse history • Ctrl/C to clear input</div>
-          <div>customise: edit components/HackerTerminal.jsx</div>
+          <div>tips: press ↑ to browse history • Ctrl+C to clear input</div>
+          <div></div>
         </div>
       </div>
     </div>
