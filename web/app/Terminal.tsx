@@ -148,7 +148,7 @@ export default function HackerTerminal() {
           <div className="w-3 h-3 rounded-full bg-yellow-400" />
           <div className="w-3 h-3 rounded-full bg-green-400" />
           <div className="ml-3 text-sm text-green-400">kunalmandalia.com</div>
-          <div className="ml-auto text-xs text-green-500">node@localhost:~</div>
+          <div className="ml-auto text-xs text-green-500 hidden sm:block">node@localhost:~</div>
         </div>
 
         <div ref={containerRef} className="bg-black px-6 py-5 h-[60vh] overflow-y-auto">
