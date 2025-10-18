@@ -23,7 +23,7 @@ export default function HackerTerminal() {
     'Role: Senior Full Stack Engineer / AI Engineer',
     '',
     'Current Position:',
-    '  Desia (Apr 2024 - Present, 10 months)',
+    '  Desia (Apr 2024 - Present)',
     '  - AI productivity tools for private equity',
     '  - 10x response time improvement with WebSockets/SSE',
     '  - Document fact checking tool (Microsoft Store)',
@@ -79,7 +79,7 @@ export default function HackerTerminal() {
     '  (Contract engagements only)',
     '',
     'Desia',
-    '  Apr 2024 - Present (10 months)',
+    '  Apr 2024 - Present',
     '  Senior Full Stack Engineer / AI Engineer',
     '  AI productivity tools for private equity professionals',
     '',
@@ -134,11 +134,16 @@ export default function HackerTerminal() {
 
     switch (c) {
       case 'help':
-        pushLine({ type: 'system', text: 'Available commands: help, ls, cat, cv, clients, echo, clear, contact, pwd, cd' });
+        pushLine({ type: 'system', text: 'Basic commands: help, ls, cat, pwd, cd, clear' });
+        pushLine({ type: 'system', text: 'Portfolio: cv, clients, contact' });
         break;
       case 'ls':
         if (path === '/home/kunalmandalia') {
           pushLine({ type: 'system', text: 'cv.md  clients.md  contact.md' });
+        } else if (path === '/home') {
+          pushLine({ type: 'system', text: 'kunalmandalia/' });
+        } else if (path === '/') {
+          pushLine({ type: 'system', text: 'home/' });
         } else {
           pushLine({ type: 'system', text: '' });
         }
@@ -186,9 +191,6 @@ export default function HackerTerminal() {
         } else {
           pushLine({ type: 'system', text: `cat: ${parts[1] || ''}: No such file` });
         }
-        break;
-      case 'echo':
-        pushLine({ type: 'system', text: parts.slice(1).join(' ') });
         break;
       case 'contact':
         pushLine({ type: 'system', text: 'LinkedIn: https://www.linkedin.com/in/kunal-mandalia-developer/' });
