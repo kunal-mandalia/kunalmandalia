@@ -265,7 +265,7 @@ export default function HackerTerminal() {
       onClick={() => inputRef.current?.focus()}
     >
       <div className="w-full max-w-4xl border-2 border-gray-700 shadow-2xl rounded-lg overflow-hidden">
-        <div className="bg-black/80 px-4 py-2 flex items-center gap-3 border-b border-gray-800">
+        <div className="bg-black/80 px-4 py-2 flex items-center gap-2 border-b border-gray-800">
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-red-600/90' : 'bg-gray-600'}`} />
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-yellow-600/90' : 'bg-gray-600'}`} />
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-green-600/90' : 'bg-gray-600'}`} />
