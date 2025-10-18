@@ -61,22 +61,28 @@ export default function HackerTerminal() {
         pushLine({ type: 'system', text: 'Available commands: help, ls, cat, projects, resume, echo, clear, contact, pwd, cd' });
         break;
       case 'ls':
-        pushLine({ type: 'system', text: 'projects  resume.txt  contact.txt' });
+        if (path === '/home/kunalmandalia') {
+          pushLine({ type: 'system', text: 'projects  resume.txt  contact.txt' });
+        } else if (path === '/home/kunalmandalia/projects') {
+          pushLine({ type: 'system', text: 'scheduler  drive-tutor  rental-reporter' });
+        } else {
+          pushLine({ type: 'system', text: '' });
+        }
         break;
       case 'pwd':
         pushLine({ type: 'system', text: path });
         break;
       case 'cd':
+        let newPath = path;
         if (!parts[1] || parts[1] === '~') {
-          setPath('/home/kunalmandalia');
+          newPath = '/home/kunalmandalia';
         } else if (parts[1] === '..') {
-          const newPath = path.split('/').slice(0, -1).join('/') || '/';
-          setPath(newPath);
+          newPath = path.split('/').slice(0, -1).join('/') || '/';
         } else {
-          const newPath = path === '/' ? `/${parts[1]}` : `${path}/${parts[1]}`;
-          setPath(newPath);
+          newPath = path === '/' ? `/${parts[1]}` : `${path}/${parts[1]}`;
         }
-        pushLine({ type: 'system', text: `directory changed to ${path}` });
+        setPath(newPath);
+        pushLine({ type: 'system', text: `directory changed to ${newPath}` });
         break;
       case 'projects':
         projects.forEach(p => pushLine({ type: 'project', text: `${p.name} — ${p.desc}  [open:${p.url}]` }));
