@@ -13,6 +13,7 @@ export default function HackerTerminal() {
   const [history, setHistory] = useState<string[]>([]);
   const [histIndex, setHistIndex] = useState(-1);
   const [path, setPath] = useState('/home/kunalmandalia');
+  const [hasFocus, setHasFocus] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -122,6 +123,19 @@ export default function HackerTerminal() {
   }, [lines]);
 
   useEffect(() => { inputRef.current?.focus(); }, []);
+
+  useEffect(() => {
+    const handleFocus = () => setHasFocus(true);
+    const handleBlur = () => setHasFocus(false);
+
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('blur', handleBlur);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('blur', handleBlur);
+    };
+  }, []);
 
   function pushLine(newLine: Line) {
     setLines(prev => [...prev, newLine]);
@@ -252,9 +266,9 @@ export default function HackerTerminal() {
     >
       <div className="w-full max-w-4xl border-2 border-gray-700 shadow-2xl rounded-lg overflow-hidden">
         <div className="bg-black/80 px-4 py-2 flex items-center gap-3 border-b border-gray-800">
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
+          <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-red-600/90' : 'bg-gray-600'}`} />
+          <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-yellow-600/90' : 'bg-gray-600'}`} />
+          <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-green-600/90' : 'bg-gray-600'}`} />
           <div className="ml-3 text-sm text-gray-100">kunalmandalia.com</div>
           <div className="ml-auto text-xs text-gray-500 hidden md:block">node@localhost:~</div>
         </div>
