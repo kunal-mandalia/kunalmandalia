@@ -15,23 +15,99 @@ export default function HackerTerminal() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const projects = [
-    { name: 'Scheduler', desc: 'Personal time & calendar planner', url: '#' },
-    { name: 'Drive Tutor', desc: 'Interactive driving lessons app', url: '#' },
-    { name: 'Rental Reporter', desc: 'Rental income analytics dashboard', url: '#' }
+  const cvContent = [
+    '==============================',
+    '         CV.TXT',
+    '==============================',
+    'Name: Kunal Mandalia',
+    'Role: Senior Full Stack Engineer / AI Engineer',
+    '',
+    'Current Position:',
+    '  Desia (Apr 2024 - Present, 10 months)',
+    '  - AI productivity tools for private equity',
+    '  - 10x response time improvement with WebSockets/SSE',
+    '  - Document fact checking tool (Microsoft Store)',
+    '  - Multi-agent system integration with ML team',
+    '',
+    'Recent Experience:',
+    '  Lead Software Engineer - SuperID (Feb 2023 - Feb 2024, 1y 1m)',
+    '  - New York based SaaS platform with Snowflake, React, Node.js',
+    '  - Stripe subscription payments (5-digit subscriptions)',
+    '  - 50%+ query performance improvements',
+    '',
+    '  Software Engineer - Advent International (Apr 2020 - Jul 2022, 2y 4m)',
+    '  - Private equity deal-making platform',
+    '  - Led GraphQL API implementation (2x speed improvement)',
+    '  - 600+ test regression suite',
+    '',
+    '  TypeScript Developer - Shell (Aug 2019 - Apr 2020, 9 months)',
+    '  - Aviation contract management digitisation',
+    '  - 100x throughput increase for contract submissions',
+    '',
+    'Education:',
+    '  BSc - University of Manchester (2006-2008)',
+    '  React Nanodegree - Udacity (2017)',
+    '  Leadership & Professional Development PgC - Harper Adams (2013-2014)',
+    '',
+    'Tech Stack:',
+    '  TypeScript, React, Next.js, Node.js, Python, FastAPI',
+    '  PostgreSQL, Snowflake, GraphQL, WebSockets',
+    '  AWS, Heroku, Docker, Kubernetes',
+    '',
+    'Contact: linkedin.com/in/kunal-mandalia-developer',
+    '==============================',
   ];
 
-  const resumeContent = [
+  const contactContent = [
     '==============================',
-    '       RESUME.TXT',
+    '      CONTACT.TXT',
     '==============================',
-    'Name: Kunal',
-    'Role: Senior Software Engineer (JS/TS)',
-    'Experience:',
-    '  - Full-stack web applications (Next.js, Tailwind, Python)',
-    '  - API design, automation, and data-driven tools',
-    '  - Cloud deployment (Vercel, AWS)',
-    'Contact: you@domain.com',
+    'LinkedIn:',
+    '  https://www.linkedin.com/in/kunal-mandalia-developer/',
+    '',
+    'Open to:',
+    '  - Consulting opportunities',
+    '  - Interesting projects',
+    '  - Professional connections',
+    '==============================',
+  ];
+
+  const clientsContent = [
+    '==============================',
+    '      CLIENTS.TXT',
+    '==============================',
+    '  (Contract engagements only)',
+    '',
+    'Desia',
+    '  Apr 2024 - Present (10 months)',
+    '  Senior Full Stack Engineer / AI Engineer',
+    '  AI productivity tools for private equity professionals',
+    '',
+    'SuperID',
+    '  Feb 2023 - Feb 2024 (1 year, 1 month)',
+    '  Lead Software Engineer',
+    '  New York based SaaS platform with data analytics',
+    '',
+    'Advent International',
+    '  Apr 2020 - Jul 2022 (2 years, 4 months)',
+    '  Software Engineer',
+    '  Deal-making platform for top 10 global PE firm',
+    '',
+    'Shell',
+    '  Aug 2019 - Apr 2020 (9 months)',
+    '  TypeScript Developer',
+    '  Aviation contract management digitisation',
+    '',
+    'Eurostar',
+    '  Feb 2019 - Aug 2019 (8 months, 2 roles)',
+    '  Technical Lead / JavaScript Developer',
+    '  Booking management for 10M+ passengers annually',
+    '',
+    'Ninety Percent of Everything',
+    '  Feb 2018 - Feb 2019 (1 year, 2 roles)',
+    '  Technical Lead / JavaScript Developer',
+    '  Maritime industry auditing and IoT platform',
+    '',
     '==============================',
   ];
 
@@ -58,13 +134,11 @@ export default function HackerTerminal() {
 
     switch (c) {
       case 'help':
-        pushLine({ type: 'system', text: 'Available commands: help, ls, cat, projects, resume, echo, clear, contact, pwd, cd' });
+        pushLine({ type: 'system', text: 'Available commands: help, ls, cat, cv, clients, echo, clear, contact, pwd, cd' });
         break;
       case 'ls':
         if (path === '/home/kunalmandalia') {
-          pushLine({ type: 'system', text: 'projects  resume.txt  contact.txt' });
-        } else if (path === '/home/kunalmandalia/projects') {
-          pushLine({ type: 'system', text: 'scheduler  drive-tutor  rental-reporter' });
+          pushLine({ type: 'system', text: 'cv.txt  clients.txt  contact.txt' });
         } else {
           pushLine({ type: 'system', text: '' });
         }
@@ -84,15 +158,27 @@ export default function HackerTerminal() {
         setPath(newPath);
         pushLine({ type: 'system', text: `directory changed to ${newPath}` });
         break;
-      case 'projects':
-        projects.forEach(p => pushLine({ type: 'project', text: `${p.name} — ${p.desc}  [open:${p.url}]` }));
+      case 'cv':
+        pushLine({ type: 'system', text: 'cv.txt — Senior Full Stack Engineer / AI Engineer\n- Current: Desia (AI productivity tools for private equity)\n- Experience: Full-stack apps, Next.js, React, Node.js, Python, AI/ML\n- Contact: linkedin.com/in/kunal-mandalia-developer' });
         break;
-      case 'resume':
-        pushLine({ type: 'system', text: 'resume.txt — Senior Software Engineer (JS/TS)\n- Experience: Full-stack apps, Next.js, Tailwind, Python\n- Contact: contact()' });
+      case 'clients':
+        pushLine({ type: 'system', text: 'clients.txt — Client History (Contract engagements)\n- 6 major clients: Desia, SuperID, Advent International, Shell, Eurostar, 90poe\n- Experience across PE, fintech, transport, maritime industries\n- Use: cat clients.txt for full list' });
         break;
       case 'cat':
-        if (parts[1] === 'resume.txt') {
-          resumeContent.forEach((line, i) => {
+        if (parts[1] === 'cv.txt') {
+          cvContent.forEach((line, i) => {
+            setTimeout(() => {
+              pushLine({ type: 'system', text: line });
+            }, i * 50);
+          });
+        } else if (parts[1] === 'clients.txt') {
+          clientsContent.forEach((line, i) => {
+            setTimeout(() => {
+              pushLine({ type: 'system', text: line });
+            }, i * 50);
+          });
+        } else if (parts[1] === 'contact.txt') {
+          contactContent.forEach((line, i) => {
             setTimeout(() => {
               pushLine({ type: 'system', text: line });
             }, i * 50);
@@ -105,7 +191,7 @@ export default function HackerTerminal() {
         pushLine({ type: 'system', text: parts.slice(1).join(' ') });
         break;
       case 'contact':
-        pushLine({ type: 'system', text: 'Email: you@domain.com — replace this placeholder in the component.' });
+        pushLine({ type: 'system', text: 'LinkedIn: https://www.linkedin.com/in/kunal-mandalia-developer/' });
         break;
       case 'clear':
         setLines([]);
