@@ -17,7 +17,7 @@ export default function HackerTerminal() {
 
   const cvContent = [
     '==============================',
-    '         CV.TXT',
+    '         CV.MD',
     '==============================',
     'Name: Kunal Mandalia',
     'Role: Senior Full Stack Engineer / AI Engineer',
@@ -60,7 +60,7 @@ export default function HackerTerminal() {
 
   const contactContent = [
     '==============================',
-    '      CONTACT.TXT',
+    '      CONTACT.MD',
     '==============================',
     'LinkedIn:',
     '  https://www.linkedin.com/in/kunal-mandalia-developer/',
@@ -74,7 +74,7 @@ export default function HackerTerminal() {
 
   const clientsContent = [
     '==============================',
-    '      CLIENTS.TXT',
+    '      CLIENTS.MD',
     '==============================',
     '  (Contract engagements only)',
     '',
@@ -138,7 +138,7 @@ export default function HackerTerminal() {
         break;
       case 'ls':
         if (path === '/home/kunalmandalia') {
-          pushLine({ type: 'system', text: 'cv.txt  clients.txt  contact.txt' });
+          pushLine({ type: 'system', text: 'cv.md  clients.md  contact.md' });
         } else {
           pushLine({ type: 'system', text: '' });
         }
@@ -159,25 +159,25 @@ export default function HackerTerminal() {
         pushLine({ type: 'system', text: `directory changed to ${newPath}` });
         break;
       case 'cv':
-        pushLine({ type: 'system', text: 'cv.txt — Senior Full Stack Engineer / AI Engineer\n- Current: Desia (AI productivity tools for private equity)\n- Experience: Full-stack apps, Next.js, React, Node.js, Python, AI/ML\n- Contact: linkedin.com/in/kunal-mandalia-developer' });
+        pushLine({ type: 'system', text: 'cv.md — Senior Full Stack Engineer / AI Engineer\n- Current: Desia (AI productivity tools for private equity)\n- Experience: Full-stack apps, Next.js, React, Node.js, Python, AI/ML\n- Contact: linkedin.com/in/kunal-mandalia-developer' });
         break;
       case 'clients':
-        pushLine({ type: 'system', text: 'clients.txt — Client History (Contract engagements)\n- 6 major clients: Desia, SuperID, Advent International, Shell, Eurostar, 90poe\n- Experience across PE, fintech, transport, maritime industries\n- Use: cat clients.txt for full list' });
+        pushLine({ type: 'system', text: 'clients.md — Client History (Contract engagements)\n- 6 major clients: Desia, SuperID, Advent International, Shell, Eurostar, 90poe\n- Experience across PE, fintech, transport, maritime industries\n- Use: cat clients.md for full list' });
         break;
       case 'cat':
-        if (parts[1] === 'cv.txt') {
+        if (parts[1] === 'cv.md') {
           cvContent.forEach((line, i) => {
             setTimeout(() => {
               pushLine({ type: 'system', text: line });
             }, i * 50);
           });
-        } else if (parts[1] === 'clients.txt') {
+        } else if (parts[1] === 'clients.md') {
           clientsContent.forEach((line, i) => {
             setTimeout(() => {
               pushLine({ type: 'system', text: line });
             }, i * 50);
           });
-        } else if (parts[1] === 'contact.txt') {
+        } else if (parts[1] === 'contact.md') {
           contactContent.forEach((line, i) => {
             setTimeout(() => {
               pushLine({ type: 'system', text: line });
