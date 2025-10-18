@@ -16,18 +16,18 @@ export const metadata: Metadata = {
   title: "kunalmandalia.com",
   description: "Kunal Mandalia - Senior Full Stack Engineer / AI Engineer",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.svg",
   },
   openGraph: {
     title: "kunalmandalia.com",
     description: "Kunal Mandalia - Senior Full Stack Engineer / AI Engineer",
-    images: "/favicon.ico",
+    images: "/favicon.svg",
   },
   twitter: {
     card: "summary_large_image",
     title: "kunalmandalia.com",
     description: "Kunal Mandalia - Senior Full Stack Engineer / AI Engineer",
-    images: "/favicon.ico",
+    images: "/favicon.svg",
   },
 };
 
