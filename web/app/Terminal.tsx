@@ -207,8 +207,11 @@ export default function HackerTerminal() {
         }
         break;
       case 'contact':
-        pushLine({ type: 'system', text: 'LinkedIn: https://www.linkedin.com/in/kunal-mandalia-developer/', link: 'https://www.linkedin.com/in/kunal-mandalia-developer/' });
-        pushLine({ type: 'system', text: 'GitHub: https://github.com/kunal-mandalia', link: 'https://github.com/kunal-mandalia' });
+        pushLine({ type: 'header', text: 'LinkedIn:' });
+        pushLine({ type: 'system', text: 'https://www.linkedin.com/in/kunal-mandalia-developer/', link: 'https://www.linkedin.com/in/kunal-mandalia-developer/' });
+        pushLine({ type: 'system', text: '' });
+        pushLine({ type: 'header', text: 'GitHub:' });
+        pushLine({ type: 'system', text: 'https://github.com/kunal-mandalia', link: 'https://github.com/kunal-mandalia' });
         break;
       case 'clear':
         setLines([]);
