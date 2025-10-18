@@ -17,7 +17,7 @@ export default function HackerTerminal() {
 
   const cvContent = [
     '==============================',
-    '         CV.MD',
+    '         cv.md',
     '==============================',
     'Name: Kunal Mandalia',
     'Role: Senior Full Stack Engineer / AI Engineer',
@@ -60,7 +60,7 @@ export default function HackerTerminal() {
 
   const contactContent = [
     '==============================',
-    '      CONTACT.MD',
+    '      contact.md',
     '==============================',
     'LinkedIn:',
     '  https://www.linkedin.com/in/kunal-mandalia-developer/',
@@ -74,7 +74,7 @@ export default function HackerTerminal() {
 
   const clientsContent = [
     '==============================',
-    '      CLIENTS.MD',
+    '      clients.md',
     '==============================',
     '  (Contract engagements only)',
     '',
@@ -159,7 +159,7 @@ export default function HackerTerminal() {
         pushLine({ type: 'system', text: `directory changed to ${newPath}` });
         break;
       case 'cv':
-        pushLine({ type: 'system', text: 'cv.md — Senior Full Stack Engineer / AI Engineer\n- Current: Desia (AI productivity tools for private equity)\n- Experience: Full-stack apps, Next.js, React, Node.js, Python, AI/ML\n- Contact: linkedin.com/in/kunal-mandalia-developer' });
+        pushLine({ type: 'system', text: 'cv.md — Senior Full Stack Engineer / AI Engineer\n- Current: Desia (AI productivity tools for private equity)\n- Experience: Full-stack apps, Next.js, React, Node.js, Python, AI/ML\n- Contact: linkedin.com/in/kunal-mandalia-developer\n- Use: cat cv.md for full CV' });
         break;
       case 'clients':
         pushLine({ type: 'system', text: 'clients.md — Client History (Contract engagements)\n- 6 major clients: Desia, SuperID, Advent International, Shell, Eurostar, 90poe\n- Experience across PE, fintech, transport, maritime industries\n- Use: cat clients.md for full list' });
