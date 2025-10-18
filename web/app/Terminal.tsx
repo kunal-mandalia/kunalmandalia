@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 interface Line {
-  type: 'user' | 'system' | 'project';
+  type: 'user' | 'system' | 'project' | 'header';
   text: string;
   link?: string;
 }
@@ -138,8 +138,18 @@ export default function HackerTerminal() {
 
     switch (c) {
       case 'help':
-        pushLine({ type: 'system', text: 'ls, cat, pwd, cd, clear' });
-        pushLine({ type: 'system', text: 'cv, clients, contact' });
+        pushLine({ type: 'header', text: 'System commands:' });
+        pushLine({ type: 'system', text: '  ls        List directory contents' });
+        pushLine({ type: 'system', text: '  cat       Display file contents' });
+        pushLine({ type: 'system', text: '  pwd       Show current directory' });
+        pushLine({ type: 'system', text: '  cd        Change directory' });
+        pushLine({ type: 'system', text: '  clear     Clear the screen' });
+        pushLine({ type: 'system', text: '  help      Show this help text' });
+        pushLine({ type: 'system', text: '' });
+        pushLine({ type: 'header', text: 'Portfolio commands:' });
+        pushLine({ type: 'system', text: '  cv        View my CV' });
+        pushLine({ type: 'system', text: '  clients   See client engagements' });
+        pushLine({ type: 'system', text: '  contact   Get in touch' });
         break;
       case 'ls':
         if (path === '/home/kunalmandalia') {
@@ -249,7 +259,9 @@ export default function HackerTerminal() {
         <div ref={containerRef} className="bg-black px-6 py-5 h-[60vh] overflow-y-auto">
           {lines.map((ln, idx) => (
             <div key={idx} className={`whitespace-pre-wrap break-words leading-relaxed text-xs md:text-sm ${ln.type === 'user' ? 'text-white' : ''}`}>
-              {ln.type === 'project' ? (
+              {ln.type === 'header' ? (
+                <span className="text-gray-600">{ln.text}</span>
+              ) : ln.type === 'project' ? (
                 <span className="text-gray-100">{ln.text}</span>
               ) : ln.link ? (
                 <a href={ln.link} target="_blank" rel="noopener noreferrer" className="text-gray-100 hover:text-white underline">
