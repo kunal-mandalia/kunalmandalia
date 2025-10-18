@@ -227,16 +227,16 @@ export default function HackerTerminal() {
 
   return (
     <div
-      className="min-h-screen bg-black text-green-300 font-mono p-6 flex items-center justify-center"
+      className="min-h-screen bg-black text-green-300 font-mono p-2 md:p-6 flex items-start md:items-center justify-center"
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="w-full max-w-4xl border-2 border-green-700 shadow-2xl rounded-lg overflow-hidden">
+      <div className="w-full h-[98vh] md:h-auto max-w-4xl border-2 border-green-700 shadow-2xl rounded-lg md:rounded-lg overflow-hidden">
         <div className="bg-black/80 px-4 py-2 flex items-center gap-3 border-b border-green-800">
           <div className="w-3 h-3 rounded-full bg-red-500" />
           <div className="w-3 h-3 rounded-full bg-yellow-400" />
           <div className="w-3 h-3 rounded-full bg-green-400" />
           <div className="ml-3 text-sm text-green-400">kunalmandalia.com</div>
-          <div className="ml-auto text-xs text-green-500 hidden sm:block">node@localhost:~</div>
+          <div className="ml-auto text-xs text-green-500 hidden md:block">node@localhost:~</div>
         </div>
 
         <div ref={containerRef} className="bg-black px-6 py-5 h-[60vh] overflow-y-auto">
@@ -266,7 +266,7 @@ export default function HackerTerminal() {
           </form>
         </div>
 
-        <div className="bg-black/90 px-4 py-2 border-t border-green-800 flex items-center justify-between text-xs text-green-500">
+        <div className="hidden md:flex bg-black/90 px-4 py-2 border-t border-green-800 items-center justify-between text-xs text-green-500">
           <div>tip: press ↑ to browse history</div>
           <div></div>
         </div>
