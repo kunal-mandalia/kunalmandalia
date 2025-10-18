@@ -234,25 +234,25 @@ export default function HackerTerminal() {
 
   return (
     <div
-      className="min-h-screen bg-black text-green-300 font-mono p-6 flex items-center justify-center"
+      className="min-h-screen bg-black text-gray-300 font-mono p-6 flex items-center justify-center"
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="w-full max-w-4xl border-2 border-green-700 shadow-2xl rounded-lg overflow-hidden">
-        <div className="bg-black/80 px-4 py-2 flex items-center gap-3 border-b border-green-800">
+      <div className="w-full max-w-4xl border-2 border-gray-700 shadow-2xl rounded-lg overflow-hidden">
+        <div className="bg-black/80 px-4 py-2 flex items-center gap-3 border-b border-gray-800">
           <div className="w-3 h-3 rounded-full bg-red-500" />
           <div className="w-3 h-3 rounded-full bg-yellow-400" />
           <div className="w-3 h-3 rounded-full bg-green-400" />
-          <div className="ml-3 text-sm text-green-400">kunalmandalia.com</div>
-          <div className="ml-auto text-xs text-green-500 hidden md:block">node@localhost:~</div>
+          <div className="ml-3 text-sm text-gray-100">kunalmandalia.com</div>
+          <div className="ml-auto text-xs text-gray-500 hidden md:block">node@localhost:~</div>
         </div>
 
         <div ref={containerRef} className="bg-black px-6 py-5 h-[60vh] overflow-y-auto">
           {lines.map((ln, idx) => (
-            <div key={idx} className={`whitespace-pre-wrap break-words leading-relaxed text-sm ${ln.type === 'user' ? 'text-green-100' : ''}`}>
+            <div key={idx} className={`whitespace-pre-wrap break-words leading-relaxed text-sm ${ln.type === 'user' ? 'text-white' : ''}`}>
               {ln.type === 'project' ? (
-                <span className="text-green-200">{ln.text}</span>
+                <span className="text-gray-100">{ln.text}</span>
               ) : ln.link ? (
-                <a href={ln.link} target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-200 underline">
+                <a href={ln.link} target="_blank" rel="noopener noreferrer" className="text-gray-100 hover:text-white underline">
                   {ln.text}
                 </a>
               ) : (
@@ -264,20 +264,20 @@ export default function HackerTerminal() {
           <div className="mt-2" />
 
           <form onSubmit={handleSubmit} className="flex items-center gap-3" aria-label="terminal-input-form">
-            <div className="text-sm text-green-400">$</div>
+            <div className="text-sm text-gray-100">$</div>
             <input
               ref={inputRef}
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent outline-none placeholder:text-green-600 text-green-200 text-sm"
+              className="flex-1 bg-transparent outline-none placeholder:text-gray-600 text-gray-100 text-sm"
               placeholder="type a command (help)"
               autoComplete="off"
             />
           </form>
         </div>
 
-        <div className="hidden md:flex bg-black/90 px-4 py-2 border-t border-green-800 items-center justify-between text-xs text-green-500">
+        <div className="hidden md:flex bg-black/90 px-4 py-2 border-t border-gray-800 items-center justify-between text-xs text-gray-500">
           <div>tip: press ↑ to browse history</div>
           <div></div>
         </div>
