@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 interface Line {
   type: 'user' | 'system' | 'project';
   text: string;
+  link?: string;
 }
 
 export default function HackerTerminal() {
@@ -64,6 +65,9 @@ export default function HackerTerminal() {
     '==============================',
     'LinkedIn:',
     '  https://www.linkedin.com/in/kunal-mandalia-developer/',
+    '',
+    'GitHub:',
+    '  https://github.com/kunal-mandalia',
     '',
     'Open to:',
     '  - Consulting opportunities',
@@ -193,7 +197,8 @@ export default function HackerTerminal() {
         }
         break;
       case 'contact':
-        pushLine({ type: 'system', text: 'LinkedIn: https://www.linkedin.com/in/kunal-mandalia-developer/' });
+        pushLine({ type: 'system', text: 'LinkedIn: https://www.linkedin.com/in/kunal-mandalia-developer/', link: 'https://www.linkedin.com/in/kunal-mandalia-developer/' });
+        pushLine({ type: 'system', text: 'GitHub: https://github.com/kunal-mandalia', link: 'https://github.com/kunal-mandalia' });
         break;
       case 'clear':
         setLines([]);
@@ -246,6 +251,10 @@ export default function HackerTerminal() {
             <div key={idx} className={`whitespace-pre-wrap break-words leading-relaxed text-sm ${ln.type === 'user' ? 'text-green-100' : ''}`}>
               {ln.type === 'project' ? (
                 <span className="text-green-200">{ln.text}</span>
+              ) : ln.link ? (
+                <a href={ln.link} target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-200 underline">
+                  {ln.text}
+                </a>
               ) : (
                 <span>{ln.text}</span>
               )}
