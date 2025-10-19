@@ -71,7 +71,6 @@ export default function HackerTerminal() {
     '  https://github.com/kunal-mandalia',
     '',
     'Open to:',
-    '  - Consulting opportunities',
     '  - Interesting projects',
     '  - Professional connections',
     '==============================',
@@ -273,9 +272,9 @@ export default function HackerTerminal() {
           <div className="ml-auto text-xs text-gray-500 hidden md:block">node@localhost:~</div>
         </div>
 
-        <div ref={containerRef} className="bg-black px-6 py-5 h-[60vh] overflow-y-auto">
+        <div ref={containerRef} className="bg-black px-6 py-4 h-[60vh] overflow-y-auto">
           {lines.map((ln, idx) => (
-            <div key={idx} className={`whitespace-pre-wrap break-words leading-relaxed text-xs md:text-sm ${ln.type === 'user' ? 'text-white' : ''}`}>
+            <div key={idx} className={`whitespace-pre-wrap break-words leading-loose text-xs md:text-sm ${ln.type === 'user' ? 'text-white' : ''}`}>
               {ln.type === 'header' ? (
                 <span className="text-gray-600">{ln.text}</span>
               ) : ln.type === 'project' ? (
@@ -290,20 +289,20 @@ export default function HackerTerminal() {
             </div>
           ))}
 
-          <div className="mt-2" />
-
-          <form onSubmit={handleSubmit} className="flex items-center gap-3" aria-label="terminal-input-form">
-            <div className="text-xs md:text-sm text-gray-100">$</div>
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent outline-none placeholder:text-gray-600 text-gray-100 text-xs md:text-sm"
-              placeholder="type a command (help)"
-              autoComplete="off"
-            />
-          </form>
+          <div className="whitespace-pre-wrap break-words leading-loose text-xs md:text-sm">
+            <form onSubmit={handleSubmit} className="flex" aria-label="terminal-input-form">
+              <div className="text-gray-100">$&nbsp;</div>
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="flex-1 bg-transparent outline-none placeholder:text-gray-600 text-gray-100"
+                placeholder="type a command (help)"
+                autoComplete="off"
+              />
+            </form>
+          </div>
         </div>
 
         <div className="hidden md:flex bg-black/90 px-4 py-2 border-t border-gray-800 items-center justify-between text-xs text-gray-500">
