@@ -231,6 +231,7 @@ export default function HackerTerminal() {
         break;
       default:
         pushLine({ type: 'system', text: `command not found: ${c}` });
+        pushLine({ type: 'header', text: 'Type "help" for available commands' });
     }
   }
 
