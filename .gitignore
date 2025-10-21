@@ -1,3 +1,4 @@
 .claude/commands/local-*
 .claude/local-workspace/*
 local/
+.DS_Store
