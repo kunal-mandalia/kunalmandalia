@@ -1,5 +1,5 @@
 .claude/commands/local-*
 .claude/local-workspace/*
-.claude/skills/local-skills/*
+.claude/skills/*
 local/
 .DS_Store
