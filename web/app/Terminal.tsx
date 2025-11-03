@@ -8,7 +8,17 @@ interface Line {
 }
 
 export default function HackerTerminal() {
-  const [lines, setLines] = useState<Line[]>([]);
+  const [lines, setLines] = useState<Line[]>([
+    { type: 'header', text: 'Welcome to kunalmandalia.com' },
+    { type: 'system', text: '' },
+    { type: 'system', text: 'Senior Full Stack Engineer / AI Engineer' },
+    { type: 'system', text: '' },
+    { type: 'system', text: 'Type "help" to see available commands, or try:' },
+    { type: 'system', text: '  • cv        - View my CV and experience' },
+    { type: 'system', text: '  • clients   - See client work history' },
+    { type: 'system', text: '  • contact   - Get in touch' },
+    { type: 'system', text: '' },
+  ]);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [histIndex, setHistIndex] = useState(-1);
@@ -107,7 +117,7 @@ export default function HackerTerminal() {
     '  Technical Lead / JavaScript Developer',
     '  Booking management for 10M+ passengers annually',
     '',
-    'Ninety Percent of Everything',
+    '90POE',
     '  Feb 2018 - Feb 2019 (1 year, 2 roles)',
     '  Technical Lead / JavaScript Developer',
     '  Maritime industry auditing and IoT platform',
@@ -194,7 +204,7 @@ export default function HackerTerminal() {
         pushLine({ type: 'system', text: 'cv.md — Senior Full Stack Engineer / AI Engineer\n- Current: Desia (AI productivity tools for private equity)\n- Experience: Full-stack apps, Next.js, React, Node.js, Python, AI/ML\n- Contact: linkedin.com/in/kunal-mandalia-developer\n- Use: cat cv.md for full CV' });
         break;
       case 'clients':
-        pushLine({ type: 'system', text: 'clients.md — Client History (Contract engagements)\n- 6 major clients: Desia, SuperID, Advent International, Shell, Eurostar, 90poe\n- Experience across PE, fintech, transport, maritime industries\n- Use: cat clients.md for full list' });
+        pushLine({ type: 'system', text: 'clients.md — Client History (Contract engagements)\n- 6 major clients: Desia, SuperID, Advent International, Shell, Eurostar, 90POE\n- Experience across PE, fintech, transport, maritime industries\n- Use: cat clients.md for full list' });
         break;
       case 'cat':
         if (parts[1] === 'cv.md') {
@@ -261,11 +271,11 @@ export default function HackerTerminal() {
 
   return (
     <div
-      className="min-h-screen bg-black text-gray-300 font-mono p-6 flex items-center justify-center"
+      className="min-h-screen bg-black text-gray-100 font-mono p-6 flex items-center justify-center"
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="w-full max-w-4xl border-2 border-gray-700 shadow-2xl rounded-lg overflow-hidden">
-        <div className="bg-black/80 px-4 py-2 flex items-center gap-2 border-b border-gray-800">
+      <div className="w-full max-w-4xl border-2 border-gray-600 shadow-2xl rounded-lg overflow-hidden">
+        <div className="bg-black/80 px-4 py-2 flex items-center gap-2 border-b border-gray-700">
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-red-600/90' : 'bg-gray-600'}`} />
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-yellow-600/90' : 'bg-gray-600'}`} />
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-green-600/90' : 'bg-gray-600'}`} />
@@ -277,11 +287,11 @@ export default function HackerTerminal() {
           {lines.map((ln, idx) => (
             <div key={idx} className={`whitespace-pre-wrap break-words leading-loose text-xs md:text-sm ${ln.type === 'user' ? 'text-white' : ''}`}>
               {ln.type === 'header' ? (
-                <span className="text-gray-600">{ln.text}</span>
+                <span className="text-gray-400">{ln.text}</span>
               ) : ln.type === 'project' ? (
-                <span className="text-gray-100">{ln.text}</span>
+                <span className="text-white">{ln.text}</span>
               ) : ln.link ? (
-                <a href={ln.link} target="_blank" rel="noopener noreferrer" className="text-gray-100 hover:text-white underline">
+                <a href={ln.link} target="_blank" rel="noopener noreferrer" className="text-white hover:text-green-400 underline">
                   {ln.text}
                 </a>
               ) : (
@@ -292,13 +302,13 @@ export default function HackerTerminal() {
 
           <div className="whitespace-pre-wrap break-words leading-loose text-xs md:text-sm">
             <form onSubmit={handleSubmit} className="flex" aria-label="terminal-input-form">
-              <div className="text-gray-100">$&nbsp;</div>
+              <div className="text-white">$&nbsp;</div>
               <input
                 ref={inputRef}
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent outline-none placeholder:text-gray-600 text-gray-100"
+                className="flex-1 bg-transparent outline-none placeholder:text-gray-500 text-white"
                 placeholder="type a command (help)"
                 autoComplete="off"
               />
@@ -306,7 +316,7 @@ export default function HackerTerminal() {
           </div>
         </div>
 
-        <div className="hidden md:flex bg-black/90 px-4 py-2 border-t border-gray-800 items-center justify-between text-xs text-gray-500">
+        <div className="hidden md:flex bg-black/90 px-4 py-2 border-t border-gray-700 items-center justify-between text-xs text-gray-400">
           <div>tip: press ↑ to browse history</div>
           <div></div>
         </div>
