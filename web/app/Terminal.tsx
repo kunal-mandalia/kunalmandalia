@@ -353,9 +353,10 @@ export default function HackerTerminal() {
 
           <div className="whitespace-pre-wrap break-words leading-loose text-xs md:text-sm">
             <form onSubmit={handleSubmit} className="flex" aria-label="terminal-input-form">
-              <div className="text-white">$&nbsp;</div>
+              <label htmlFor="terminal-input" className="text-white">$&nbsp;</label>
               <div className="relative flex-1">
                 <input
+                  id="terminal-input"
                   ref={inputRef}
                   value={input}
                   onChange={e => setInput(e.target.value)}
@@ -364,6 +365,7 @@ export default function HackerTerminal() {
                   style={{ caretColor: 'transparent' }}
                   placeholder=""
                   autoComplete="off"
+                  aria-label="Terminal command input"
                 />
                 <span
                   ref={cursorRef}
