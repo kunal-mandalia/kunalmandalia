@@ -257,7 +257,9 @@ export default function HackerTerminal() {
         pushLine({ type: 'system', text: 'clients.md — Client History (Contract engagements)\n- 6 major clients: Desia, SuperID, Advent International, Shell, Eurostar, 90POE\n- Experience across PE, fintech, transport, maritime industries\n- Use: cat clients.md for full list' });
         break;
       case 'cat':
-        if (parts[1] === 'cv.md') {
+        if (path !== '/home/kunalmandalia') {
+          pushLine({ type: 'system', text: `cat: ${parts[1] || ''}: No such file or directory` });
+        } else if (parts[1] === 'cv.md') {
           cvContent.forEach((line, i) => {
             setTimeout(() => {
               pushLine({ type: 'system', text: line });
@@ -276,7 +278,7 @@ export default function HackerTerminal() {
             }, i * 50);
           });
         } else {
-          pushLine({ type: 'system', text: `cat: ${parts[1] || ''}: No such file` });
+          pushLine({ type: 'system', text: `cat: ${parts[1] || ''}: No such file or directory` });
         }
         break;
       case 'contact':
