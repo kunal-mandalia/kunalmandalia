@@ -9,21 +9,20 @@ interface Line {
 
 export default function HackerTerminal() {
   const [lines, setLines] = useState<Line[]>([
-    { type: 'header', text: 'Welcome to kunalmandalia.com // Full Stack Engineer' },
-    { type: 'system', text: '' },
-    { type: 'system', text: 'Type "help" to see available commands, or try:' },
-    { type: 'system', text: '  • cv        - view CV and experience' },
-    { type: 'system', text: '  • clients   - see client work history' },
-    { type: 'system', text: '  • contact   - get in touch' },
-    { type: 'system', text: '' },
+    { type: 'header', text: '👋 Welcome to kunalmandalia.com // Full Stack Engineer' },
+    { type: 'header', text: 'Type "help" to see available commands' },
+    { type: 'system', text: ' ' },
   ]);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [histIndex, setHistIndex] = useState(-1);
   const [path, setPath] = useState('/home/kunalmandalia');
   const [hasFocus, setHasFocus] = useState(true);
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const [cursorPosition, setCursorPosition] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const cursorRef = useRef<HTMLSpanElement>(null);
 
   const cvContent = [
     '==============================',
@@ -144,6 +143,59 @@ export default function HackerTerminal() {
     };
   }, []);
 
+  // Blinking cursor effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCursorVisible(prev => !prev);
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Update cursor position based on input and cursor position
+  useEffect(() => {
+    if (inputRef.current && cursorRef.current) {
+      const inputElement = inputRef.current;
+      const cursor = cursorRef.current;
+
+      // Get the text up to the cursor position
+      const textBeforeCursor = inputElement.value.substring(0, cursorPosition);
+
+      // Create a temporary span to measure text width
+      const measureSpan = document.createElement('span');
+      measureSpan.style.font = window.getComputedStyle(inputElement).font;
+      measureSpan.style.visibility = 'hidden';
+      measureSpan.style.position = 'absolute';
+      measureSpan.style.whiteSpace = 'pre';
+      measureSpan.textContent = textBeforeCursor || '';
+      document.body.appendChild(measureSpan);
+
+      const textWidth = measureSpan.offsetWidth;
+      document.body.removeChild(measureSpan);
+
+      cursor.style.left = `${textWidth}px`;
+    }
+  }, [input, cursorPosition]);
+
+  // Track cursor position changes
+  useEffect(() => {
+    const inputElement = inputRef.current;
+    if (!inputElement) return;
+
+    const updateCursorPos = () => {
+      setCursorPosition(inputElement.selectionStart || 0);
+    };
+
+    inputElement.addEventListener('click', updateCursorPos);
+    inputElement.addEventListener('keyup', updateCursorPos);
+    inputElement.addEventListener('select', updateCursorPos);
+
+    return () => {
+      inputElement.removeEventListener('click', updateCursorPos);
+      inputElement.removeEventListener('keyup', updateCursorPos);
+      inputElement.removeEventListener('select', updateCursorPos);
+    };
+  }, []);
+
   function pushLine(newLine: Line) {
     setLines(prev => [...prev, newLine]);
   }
@@ -251,6 +303,7 @@ export default function HackerTerminal() {
     setHistory(h => [input, ...h].slice(0, 50));
     setHistIndex(-1);
     setInput('');
+    setCursorPosition(0);
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -301,15 +354,31 @@ export default function HackerTerminal() {
           <div className="whitespace-pre-wrap break-words leading-loose text-xs md:text-sm">
             <form onSubmit={handleSubmit} className="flex" aria-label="terminal-input-form">
               <div className="text-white">$&nbsp;</div>
-              <input
-                ref={inputRef}
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent outline-none placeholder:text-gray-500 text-white"
-                placeholder="type a command (help)"
-                autoComplete="off"
-              />
+              <div className="relative flex-1">
+                <input
+                  ref={inputRef}
+                  value={input}
+                  onChange={e => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="w-full bg-transparent outline-none placeholder:text-gray-500 text-white"
+                  style={{ caretColor: 'transparent' }}
+                  placeholder=""
+                  autoComplete="off"
+                />
+                <span
+                  ref={cursorRef}
+                  className="absolute pointer-events-none"
+                  style={{
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: '0.6em',
+                    height: '1em',
+                    backgroundColor: cursorVisible ? 'white' : 'transparent',
+                    display: 'inline-block',
+                    transition: 'left 0.05s',
+                  }}
+                />
+              </div>
             </form>
           </div>
         </div>
