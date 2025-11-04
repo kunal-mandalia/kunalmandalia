@@ -375,7 +375,7 @@ export default function HackerTerminal() {
                     transform: 'translateY(-50%)',
                     width: '0.6em',
                     height: '1em',
-                    backgroundColor: cursorVisible ? 'white' : 'transparent',
+                    backgroundColor: (hasFocus && cursorVisible) ? 'white' : 'transparent',
                     display: 'inline-block',
                     transition: 'left 0.05s',
                   }}
