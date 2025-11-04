@@ -395,7 +395,7 @@ export default function HackerTerminal() {
         </div>
 
         <div className="hidden md:flex bg-black/90 px-4 py-2 border-t border-gray-600 items-center justify-between text-xs text-gray-400">
-          <div className="text-gray-500">➤ type "help" for available commands or press ↑ to browse history</div>
+          <div className="text-gray-500">➤ type &ldquo;help&rdquo; for available commands or press ↑ to browse history</div>
           <div></div>
         </div>
       </div>
