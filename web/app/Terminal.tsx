@@ -9,14 +9,12 @@ interface Line {
 
 export default function HackerTerminal() {
   const [lines, setLines] = useState<Line[]>([
-    { type: 'header', text: 'Welcome to kunalmandalia.com' },
-    { type: 'system', text: '' },
-    { type: 'system', text: 'Senior Full Stack Engineer / AI Engineer' },
+    { type: 'header', text: 'Welcome to kunalmandalia.com // Full Stack Engineer' },
     { type: 'system', text: '' },
     { type: 'system', text: 'Type "help" to see available commands, or try:' },
-    { type: 'system', text: '  • cv        - View my CV and experience' },
-    { type: 'system', text: '  • clients   - See client work history' },
-    { type: 'system', text: '  • contact   - Get in touch' },
+    { type: 'system', text: '  • cv        - view CV and experience' },
+    { type: 'system', text: '  • clients   - see client work history' },
+    { type: 'system', text: '  • contact   - get in touch' },
     { type: 'system', text: '' },
   ]);
   const [input, setInput] = useState('');
