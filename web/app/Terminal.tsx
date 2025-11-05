@@ -8,11 +8,7 @@ interface Line {
 }
 
 export default function HackerTerminal() {
-  const [lines, setLines] = useState<Line[]>([
-    // { type: 'header', text: '>_ Welcome to the terminal' },
-    // { type: 'header', text: 'Type "help" to see available commands' },
-    // { type: 'header', text: ' ' },
-  ]);
+  const [lines, setLines] = useState<Line[]>([]);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [histIndex, setHistIndex] = useState(-1);
@@ -324,18 +320,31 @@ export default function HackerTerminal() {
 
   return (
     <div
-      className="min-h-screen bg-black text-gray-100 font-mono p-6 flex items-center justify-center"
+      className="min-h-screen text-gray-100 font-mono p-6 flex items-center justify-center relative"
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="w-full max-w-4xl border-2 border-gray-600 shadow-2xl rounded-lg overflow-hidden">
-        <div className="bg-black/80 px-4 py-2 flex items-center gap-2 border-b border-gray-700">
+      <div
+        className="absolute -z-10"
+        style={{
+          backgroundImage: 'url(/background-1.avif)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          top: '-20px',
+          left: '-20px',
+          right: '-20px',
+          bottom: '-20px'
+        }}
+      />
+      <div className="w-full max-w-4xl border-1 border-gray-900/40 shadow-2xl rounded-lg overflow-hidden">
+        <div className="bg-gray-900/90 px-4 py-2 flex items-center gap-2 border-b border-gray-700">
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-red-600/90' : 'bg-gray-600'}`} />
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-yellow-600/90' : 'bg-gray-600'}`} />
           <div className={`w-3 h-3 rounded-full transition-colors ${hasFocus ? 'bg-green-600/90' : 'bg-gray-600'}`} />
           <div className="ml-3 text-sm text-gray-400 font-semibold ml-2">kunalmandalia — -zsh </div>
           <div className="ml-auto text-xs text-gray-500 hidden md:block">
             <div className="flex items-center gap-2">
-              <div className="inline-block text-orange-400/80 rounded px-2 py-0.5 text-xs font-semibold ml-2">Full Stack Dev</div>
+              <div className="inline-block text-pink-400/80 rounded px-2 py-0.5 text-xs font-semibold ml-2">Full Stack Dev</div>
               <div className="inline-block text-gray-400 rounded px-2 py-0.5 text-xs font-semibold ml-2">
                 London, UK
               </div>
@@ -343,7 +352,7 @@ export default function HackerTerminal() {
           </div>
         </div>
 
-        <div ref={containerRef} className="bg-black px-6 py-4 h-[60vh] overflow-y-auto">
+        <div ref={containerRef} className="bg-gray-900/90 px-6 py-4 h-[60vh] overflow-y-auto">
           {lines.map((ln, idx) => (
             <div key={idx} className={`whitespace-pre-wrap break-words leading-loose text-xs md:text-sm ${ln.type === 'user' ? 'text-white' : ''}`}>
               {ln.type === 'header' ? (
@@ -394,8 +403,8 @@ export default function HackerTerminal() {
           </div>
         </div>
 
-        <div className="hidden md:flex bg-black/90 px-4 py-2 border-t border-gray-600 items-center justify-between text-xs text-gray-400">
-          <div className="text-gray-500">➤ type &ldquo;help&rdquo; for available commands or press ↑ to browse history</div>
+        <div className="hidden md:flex bg-gray-900/90 px-4 py-2 border-t border-gray-600/40 items-center justify-between text-xs text-gray-400">
+          <div className="text-gray-500">Type &ldquo;help&rdquo; for available commands or press ↑ to browse history</div>
           <div></div>
         </div>
       </div>
